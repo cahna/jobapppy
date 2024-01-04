@@ -5,7 +5,7 @@ repos:
      - id: mypy
        files: ^(jobapppy/|tests/)
        additional_dependencies:
-        - "pydantic>=1.10.4,<2"
+        - "pydantic>=2.5.0"
         - "types-PyYAML>=6.0.12.12"
  - repo: local
    hooks:

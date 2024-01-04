@@ -5,12 +5,25 @@ from typing import Optional
 
 import typer
 import yaml
+from pydantic import RootModel, TypeAdapter
 
 from .environments import DEFAULT_TEMPLATE, EnvironmentBuilder, TemplateType
-from .filters import make_tex_escape
 from .schemas import JobAppYaml, TemplateConfig
 
 cli = typer.Typer()
+
+
+@cli.command()
+def parse(
+    json_indent: Optional[int] = typer.Option(None, "-i", help="Indentation for JSON output"),
+    check: bool = typer.Option(False, "-c", help="Do not output JSON, just check if valid"),
+    resume_yaml: typer.FileText = typer.Argument(sys.stdin, help="Yaml resume input"),
+    output_file: typer.FileTextWrite = typer.Argument(sys.stdout, help="Write output to file"),
+):
+    data = yaml.safe_load(resume_yaml)
+    jobapp = JobAppYaml(**data)
+    if not check:
+        typer.echo(RootModel[JobAppYaml](jobapp).model_dump_json(indent=json_indent), file=output_file)
 
 
 @cli.command()
@@ -36,4 +49,15 @@ def template(
     jobapp = JobAppYaml(**data)
 
     rendered_output = template.render(resume=jobapp.resume)
-    output_file.write(rendered_output)
+    typer.echo(rendered_output, file=output_file)
+
+
+@cli.command()
+def schema(
+    json_indent: Optional[int] = typer.Option(None, "-i", help="Indentation for JSON output"),
+):
+    typer.echo(json.dumps(TypeAdapter(JobAppYaml).json_schema(), indent=json_indent))
+
+
+if __name__ == "__main__":
+    cli()

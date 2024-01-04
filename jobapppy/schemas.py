@@ -1,6 +1,6 @@
-from typing import Iterable, Literal, Mapping, Optional
+from typing import List, Literal, Mapping, Optional
 
-from pydantic import BaseModel, Field, ValidationError, validator
+from pydantic import BaseModel, Field, field_validator
 from pydantic.dataclasses import dataclass
 
 
@@ -29,7 +29,7 @@ class DatedListItems(BaseSectionContent):
     title: str
     start_date: str
     end_date: str
-    items: Iterable[str]
+    items: List[str]
     description2: Optional[str] = Field(None)
 
 
@@ -46,7 +46,7 @@ class HighlightItemList(BaseSectionContent):
     """Categorized item list. Ex: Skills & Expertise section"""
 
     description: str
-    items: Iterable[str]
+    items: List[str]
 
 
 class AnnotatedItem(BaseSectionContent):
@@ -57,28 +57,23 @@ class AnnotatedItem(BaseSectionContent):
     annotation: str
 
 
-# TODO: how to make this typing work(?)
-# SectionType: Mapping[str, BaseSectionContent] = {c.__name__: c for c in BaseSectionContent.__subclasses__()}
-# SectionTypeName = Literal[tuple(SectionType.keys())]
-# SectionTypeClass = Union[tuple(SectionType.values())]
-
 SectionTypeName = Literal["DatedListItems", "DescribeItem", "HighlightItemList", "AnnotatedItem"]
-# SectionTypeClass = type[BaseSectionContent]
 
 
 class SectionDefinition(BaseModel):
     name: str
     type_: SectionTypeName = Field(alias="type")
-    contents: Iterable[BaseSectionContent]
+    contents: List[BaseSectionContent]
 
-    @validator("contents", pre=True)
+    @field_validator("contents", mode="before")
+    @classmethod
     def handle_parse_contents(cls, value, values):
         if isinstance(value, list):
             SECTION_TYPES = {c.__name__: c for c in BaseSectionContent.__subclasses__()}
-            contents_type = values["type_"]
+            contents_type = values.data["type_"]
             Klass = SECTION_TYPES[contents_type]
             return [Klass(**data) for data in value]
-        raise ValidationError(f"Invalid value for section contents: {contents_type}")
+        raise ValueError(f"Invalid value for section contents: {contents_type}")
 
 
 @dataclass
@@ -86,7 +81,7 @@ class Resume:
     """Resume definition"""
 
     info: Info
-    sections: Iterable[SectionDefinition]
+    sections: List[SectionDefinition]
 
 
 @dataclass

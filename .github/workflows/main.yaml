@@ -54,7 +54,7 @@ jobs:
       - name: Init python/poetry environment
         uses: ./.github/actions/setup-poetry-env
 
-      - run: poetry run mypy ./jobapp ./tests
+      - run: poetry run mypy ./jobapppy ./tests
 
   tox:
     needs:

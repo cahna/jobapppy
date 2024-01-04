@@ -29,11 +29,11 @@ resume:
     - name: Education
       type: DescribeItem
       contents:
-        - description: 1995
+        - description: "1995"
           annotation: University of New New York
           text1: Bachelor of Science
           text2: Stuff
-        - description: 1991
+        - description: "1991"
           annotation: New New York High School
           text1: GED
           text2: Grade 12
@@ -57,6 +57,6 @@ resume:
         - description: 1999--3000
           text1: Oldest Living Human
           annotation: Earth
-        - description: 3001
+        - description: "3001"
           text1: Tentacle Pope
           annotation: Universe Gamma
