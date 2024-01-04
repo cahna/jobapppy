@@ -1,0 +1,62 @@
+---
+resume:
+  info:
+    name: PHILLIP FRY
+    title: A Real Person
+    address1: 1600 Pennsylvania Avenue, N.W.
+    address2: Washington, DC 20500
+    phone: (555) 555-5555
+    email: p.fry@dev.null
+  sections:
+    - name: Work Experience
+      type: DatedListItems
+      contents:
+        - description1: Planet Express
+          description2: New New York
+          title: Delivery Pilot
+          start_date: Jan 3000
+          end_date: present
+          items:
+            - Deliver customer goods in a timely manner with high quality assurance.
+            - Pilot interplanetary transportation vessels. Manager of crew and robot assets.
+        - description1: Pizza
+          description2: New New York
+          title: Delivery Specialist
+          start_date: May 1999
+          end_date: Jan 2000
+          items:
+            - Delivered pizzas.
+    - name: Education
+      type: DescribeItem
+      contents:
+        - description: 1995
+          annotation: University of New New York
+          text1: Bachelor of Science
+          text2: Stuff
+        - description: 1991
+          annotation: New New York High School
+          text1: GED
+          text2: Grade 12
+    - name: Skills & Expertise
+      type: HighlightItemList
+      contents:
+        - description: Vehicles
+          items:
+            - Spaceships
+            - Cars
+            - Jetpacks
+        - description: Partners
+          items:
+            - Leela
+            - Michelle
+            - Amy
+            - Mildred
+    - name: Recognition
+      type: DescribeItem
+      contents:
+        - description: 1999--3000
+          text1: Oldest Living Human
+          annotation: Earth
+        - description: 3001
+          text1: Tentacle Pope
+          annotation: Universe Gamma

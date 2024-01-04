@@ -1,0 +1,32 @@
+repos:
+ - repo: https://github.com/pre-commit/mirrors-mypy
+   rev: v0.991
+   hooks:
+     - id: mypy
+       files: ^(jobapppy/|tests/)
+       additional_dependencies:
+        - "pydantic>=1.10.4,<2"
+        - "types-PyYAML>=6.0.12.12"
+ - repo: local
+   hooks:
+     - id: black
+       name: black
+       entry: black
+       language: system
+       types: [ python ]
+       files: ^(jobapppy/|tests/)
+
+     - id: isort
+       name: isort
+       entry: isort
+       language: system
+       types: [ python ]
+       include: ^(jobapppy/|tests/)
+      
+     - id: flake8
+       name: flake8
+       entry: flake8
+       language: system
+       types: [ python ]
+       files: ^(jobapppy/|tests/)
+

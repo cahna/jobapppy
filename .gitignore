@@ -1,0 +1,17 @@
+
+# Tex
+*.out
+*.gz
+*.aux
+*.pdf
+*.log
+*.swp
+
+# Python
+venv/
+.mypy_cache/
+**/__pycache__
+.tox/
+.pytest_cache/
+.coverage
+coverage.xml
