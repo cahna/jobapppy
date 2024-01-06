@@ -69,6 +69,9 @@ jobs:
         python-version: ['3.10', '3.11']
       fail-fast: true
     runs-on: ${{ matrix.platform }}
+    environment: 
+      name: ci-test
+      url: https://app.codecov.io/gh/cahna/jobapppy
     steps:
       - name: Check out
         uses: actions/checkout@v4
@@ -90,5 +93,3 @@ jobs:
       
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

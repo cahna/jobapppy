@@ -20,8 +20,9 @@ jobs:
     name: Publish (PyPI)
     needs: build
     runs-on: ubuntu-latest
-    env:
-      POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
+    environment: 
+      name: pypi-prod
+      url: https://pypi.org/project/jobapppy/
     steps:
       - uses: actions/checkout@v4
       - name: Init python/poetry environment
