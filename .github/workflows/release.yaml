@@ -1,0 +1,33 @@
+name: Release
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: Poetry build and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Init python/poetry environment
+        uses: ./.github/actions/setup-poetry-env
+        with:
+          cached-venv: false
+      - run: poetry build
+      - run: poetry run pytest
+
+  publish_pypi:
+    name: Publish (PyPI)
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Init python/poetry environment
+        uses: ./.github/actions/setup-poetry-env
+        with:
+          cached-venv: false
+      - run: poetry build
+      - run: poetry publish
+      
