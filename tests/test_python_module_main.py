@@ -7,4 +7,4 @@ def test_run_python_module():
 
 def test_shell_run_as_python_module(shell):
     shell_result = shell.run("python", "-m", "jobapppy", "--help")
-    assert shell_result.exitcode == 0
+    assert shell_result.returncode == 0

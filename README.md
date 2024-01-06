@@ -3,7 +3,7 @@
 [![PyPI version](https://badge.fury.io/py/jobapppy.svg)](https://badge.fury.io/py/jobapppy)[![Python Versions](https://img.shields.io/pypi/pyversions/jobapppy?style=plastic)](https://pypi.org/project/jobapppy)
 [![Main](https://github.com/cahna/jobapppy/actions/workflows/main.yaml/badge.svg)](https://github.com/cahna/jobapppy/actions/workflows/main.yaml)[![codecov](https://codecov.io/gh/cahna/jobapppy/graph/badge.svg?token=3XULKTDJ2I)](https://codecov.io/gh/cahna/jobapppy)
 
-Structured data format for resumes, and command-line tools to generate formatted resume documents (markdown, tex, pdf, etc).
+Command-line tools and interfaces to generate formatted resume documents (markdown, tex, pdf, etc).
 
 Documentation: [https://cahna.github.io/jobapppy](https://cahna.github.io/jobapppy)
 
