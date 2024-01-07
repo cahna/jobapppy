@@ -7,6 +7,7 @@ repository = "https://github.com/cahna/jobapppy"
 documentation = "https://cahna.github.io/jobapppy/"
 homepage = "https://cahna.github.io/jobapppy/"
 readme = "README.md"
+license = "MIT"
 keywords = ["resume", "template"]
 include = ["jobapppy/templates/*"]
 classifiers = [
