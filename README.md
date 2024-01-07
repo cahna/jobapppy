@@ -7,6 +7,17 @@ Tools to generate formatted resume documents (markdown, tex, pdf, etc) from yaml
 
 Documentation: [https://cahna.github.io/jobapppy](https://cahna.github.io/jobapppy)
 
+## Installation
+
+- pip:
+   ```console
+   pip install jobapppy
+   ```
+- docker:
+   ```console
+   docker pull ghcr.io/cahna/jobapppy:latest
+   ```
+
 ## CLI Usage
 
 - via script name installed in path:
@@ -17,8 +28,14 @@ Documentation: [https://cahna.github.io/jobapppy](https://cahna.github.io/jobapp
    ```console
    python -m jobapppy --help
    ```
+- via docker:
+   ```console
+   docker run --rm -it ghcr.io/cahna/jobapppy --help
+   ```
 
 ## Tutorial
+
+Create `resume.yaml`, then generate `resume.md` and/or `resume.tex` with `jobapppy`:
 
 1. Create a `resume.yaml` file that satisfies jobapppy's schema 
    - see `resume.example.yaml`
