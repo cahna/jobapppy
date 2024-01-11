@@ -62,7 +62,7 @@ Create `resume.yaml`, then generate `resume.md` and/or `resume.tex` with `jobapp
          ```console
          jobapppy template -t tex resume.yaml resume.tex
          ```
-      2. Generate `resume.pdf`:
+      2. Generate `resume.pdf` using [cahna/jobapp](https://hub.docker.com/r/cahna/jobapp):
          ```console
          docker run --rm -it -v "$(pwd):/data" --net=none --user="$(id -u):$(id -g)" cahna/jobapp lualatex -synctex=1 -interaction=nonstopmode resume.tex
          ```
