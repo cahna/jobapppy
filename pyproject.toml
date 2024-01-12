@@ -1,12 +1,13 @@
 [tool.poetry]
 name = "jobapppy"
-version = "0.1.0"
-description = "Command-line tools and interfaces to generate formatted resume documents (markdown, tex, pdf, etc)"
+version = "0.1.1"
+description = "Tools to generate formatted resume documents (markdown, tex, pdf, etc) from yaml data."
 authors = ["Conor Heine <conor.heine+jobapppy@gmail.com>"]
 repository = "https://github.com/cahna/jobapppy"
 documentation = "https://cahna.github.io/jobapppy/"
 homepage = "https://cahna.github.io/jobapppy/"
 readme = "README.md"
+license = "MIT"
 keywords = ["resume", "template"]
 include = ["jobapppy/templates/*"]
 classifiers = [
