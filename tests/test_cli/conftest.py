@@ -4,6 +4,8 @@ import pytest
 from typer import Typer
 from typer.testing import CliRunner
 
+from .types import CliInvoke
+
 
 @pytest.fixture
 def cli_entrypoint() -> Typer:
@@ -14,6 +16,6 @@ def cli_entrypoint() -> Typer:
 
 
 @pytest.fixture
-def cli_invoke(cli_entrypoint):
+def cli_invoke(cli_entrypoint) -> CliInvoke:
     runner = CliRunner()
     return functools.partial(runner.invoke, cli_entrypoint)

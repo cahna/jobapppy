@@ -1,4 +1,4 @@
-from typing import List, Literal, Mapping, Optional
+from typing import List, Literal, Mapping, Optional, Type
 
 from pydantic import BaseModel, Field, field_validator
 from pydantic.dataclasses import dataclass
@@ -6,7 +6,7 @@ from pydantic.dataclasses import dataclass
 
 @dataclass
 class Info:
-    """Personal and contact info"""
+    """Personal and contact info."""
 
     name: str
     title: str
@@ -17,13 +17,13 @@ class Info:
 
 
 class BaseSectionContent(BaseModel):
-    """All section contents type must subclass this type to work"""
+    """All section contents type must subclass this type to work."""
 
     pass
 
 
 class DatedListItems(BaseSectionContent):
-    """Bullet points with date as annotation"""
+    """Bullet points with date as annotation."""
 
     description1: str
     title: str
@@ -34,7 +34,7 @@ class DatedListItems(BaseSectionContent):
 
 
 class DescribeItem(BaseSectionContent):
-    """Single item with description, text, optional secondary text, and annotation"""
+    """Single item with description, text, optional secondary text, and annotation."""
 
     description: str
     annotation: str
@@ -43,14 +43,14 @@ class DescribeItem(BaseSectionContent):
 
 
 class HighlightItemList(BaseSectionContent):
-    """Categorized item list. Ex: Skills & Expertise section"""
+    """Categorized item list. Ex: Skills & Expertise section."""
 
     description: str
     items: List[str]
 
 
 class AnnotatedItem(BaseSectionContent):
-    """Categorized item with annotation. Ex: Open Source Contributions"""
+    """Categorized item with annotation. Ex: Open Source Contributions."""
 
     description: str
     text: str
@@ -61,6 +61,8 @@ SectionTypeName = Literal["DatedListItems", "DescribeItem", "HighlightItemList",
 
 
 class SectionDefinition(BaseModel):
+    """Definition of a resume section."""
+
     name: str
     type_: SectionTypeName = Field(alias="type")
     contents: List[BaseSectionContent]
@@ -68,17 +70,20 @@ class SectionDefinition(BaseModel):
     @field_validator("contents", mode="before")
     @classmethod
     def handle_parse_contents(cls, value, values):
+        """Parse the contents field into the correct subclass based on the type_ field."""
         if isinstance(value, list):
-            SECTION_TYPES = {c.__name__: c for c in BaseSectionContent.__subclasses__()}
+            section_types: Mapping[str, Type[BaseSectionContent]] = {
+                c.__name__: c for c in BaseSectionContent.__subclasses__()
+            }
             contents_type = values.data["type_"]
-            Klass = SECTION_TYPES[contents_type]
-            return [Klass(**data) for data in value]
+            klass = section_types[contents_type]
+            return [klass(**data) for data in value]
         raise ValueError(f"Invalid value for section contents: {contents_type}")
 
 
 @dataclass
 class Resume:
-    """Resume definition"""
+    """Resume definition."""
 
     info: Info
     sections: List[SectionDefinition]
@@ -86,13 +91,13 @@ class Resume:
 
 @dataclass
 class JobAppYaml:
-    """Schema for jobapp yaml input"""
+    """Schema for jobapp yaml input."""
 
     resume: Resume
 
 
 @dataclass
 class TemplateConfig:
-    """JSON file defining strings for global search and replace"""
+    """JSON file defining strings for global search and replace."""
 
     replace_strings: Optional[Mapping[str, str]] = Field(None)

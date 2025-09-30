@@ -5,8 +5,8 @@ import pytest
 
 
 @pytest.fixture(scope="session", autouse=True)
-def root_directory(request) -> Path:
-    return Path(request.config.rootdir)
+def root_directory(request: pytest.FixtureRequest) -> Path:
+    return Path(request.config.rootpath)
 
 
 @pytest.fixture(scope="session", autouse=True)

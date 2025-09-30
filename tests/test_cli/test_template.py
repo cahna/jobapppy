@@ -1,4 +1,8 @@
+from pathlib import Path
+
 import pytest
+
+from .types import CliInvoke
 
 
 @pytest.mark.parametrize(
@@ -9,7 +13,7 @@ import pytest
         pytest.param(["-t", "tex"]),
     ],
 )
-def test_cli_template(cmd_args, cli_invoke, tmp_path, example_resume_yaml_contents):
+def test_cli_template(cmd_args: list[str], cli_invoke: CliInvoke, tmp_path: Path, example_resume_yaml_contents: str):
     resume_file = tmp_path / "test-resume.yml"
     resume_file.write_text(example_resume_yaml_contents)
     output_file = tmp_path / "test-resume.md"
@@ -20,7 +24,7 @@ def test_cli_template(cmd_args, cli_invoke, tmp_path, example_resume_yaml_conten
     assert output_file.stat().st_size > 0
 
 
-def test_errors_on_invalid_template_type(cli_invoke, tmp_path, example_resume_yaml_contents):
+def test_errors_on_invalid_template_type(cli_invoke: CliInvoke, tmp_path: Path, example_resume_yaml_contents: str):
     resume_file = tmp_path / "test-resume.yml"
     resume_file.write_text(example_resume_yaml_contents)
     output_file = tmp_path / "test-resume.md"
@@ -30,7 +34,9 @@ def test_errors_on_invalid_template_type(cli_invoke, tmp_path, example_resume_ya
     assert not output_file.exists()
 
 
-def test_option_template_config(cli_invoke, tmp_path, example_resume_yaml_contents, get_template_path):
+def test_option_template_config(
+    cli_invoke: CliInvoke, tmp_path: Path, example_resume_yaml_contents: str, get_template_path: str
+):
     test_config_file = tmp_path / "tmpl-config.json"
     test_config_file.write_text('{"replace_strings": {"test": "value"}}')
     resume_file = tmp_path / "test-resume.yml"

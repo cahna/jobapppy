@@ -3,6 +3,8 @@ from typing import Callable, Dict, Optional
 
 
 def make_tex_escape(extra_strings: Optional[Dict[str, str]] = None) -> Callable[[str], str]:
+    """Returns a function that escapes special characters for LaTeX."""
+
     def tex_escape(value: str) -> str:
         substitute_strings = {
             "&": "\\&",

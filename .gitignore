@@ -1,17 +1,55 @@
-# Python
-venv/
-dist/
-.mypy_cache/
-**/__pycache__
-.tox/
-.pytest_cache/
-.coverage
-coverage.xml
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 
-# Tex
-*.out
-*.gz
-*.aux
-*.pdf
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+*.whl
+
+# Virtual environment
+.env/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Test and coverage reports
+.coverage
+*.cover
+coverage.xml
 *.log
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+unit-test-report.json
+
+# Static analysis tools
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+dmypy.json
+
+# Editor and IDE files
+.idea/
 *.swp
+*.swo
+*.swn
+*.bak
+
+# System files
+.DS_Store
+Thumbs.db
+
+.env
+.env.*
