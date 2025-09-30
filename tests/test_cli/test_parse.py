@@ -1,5 +1,10 @@
+from pathlib import Path
+from typing import Any
+
 import pytest
 import yaml
+
+from .types import CliInvoke
 
 
 @pytest.mark.parametrize(
@@ -11,7 +16,7 @@ import yaml
         pytest.param(["-i2"]),
     ],
 )
-def test_cli_parse(cmd_args, cli_invoke, tmp_path, example_resume_yaml_contents):
+def test_cli_parse(cmd_args: list[str], cli_invoke: CliInvoke, tmp_path: Path, example_resume_yaml_contents: str):
     resume_file = tmp_path / "test-resume.yml"
     resume_file.write_text(example_resume_yaml_contents)
     output_file = tmp_path / "test-resume.md"
@@ -29,7 +34,9 @@ def test_cli_parse(cmd_args, cli_invoke, tmp_path, example_resume_yaml_contents)
         ["--check"],
     ],
 )
-def test_cli_parse_check_only(cmd_options, cli_invoke, tmp_path, example_resume_yaml_contents):
+def test_cli_parse_check_only(
+    cmd_options: list[str], cli_invoke: CliInvoke, tmp_path: Path, example_resume_yaml_contents: str
+):
     resume_file = tmp_path / "test-resume.yml"
     resume_file.write_text(example_resume_yaml_contents)
     output_file = tmp_path / "test-resume.md"
@@ -50,7 +57,7 @@ def test_cli_parse_check_only(cmd_options, cli_invoke, tmp_path, example_resume_
     ],
 )
 def test_cli_parse_errors_on_invalid_section_contents(
-    invalid_section_contents, cli_invoke, tmp_path, example_resume_yaml_contents
+    invalid_section_contents: Any, cli_invoke: CliInvoke, tmp_path: Path, example_resume_yaml_contents: str
 ):
     resume_data = yaml.safe_load(example_resume_yaml_contents)
     resume_data["resume"]["sections"][0]["contents"] = invalid_section_contents
@@ -63,7 +70,7 @@ def test_cli_parse_errors_on_invalid_section_contents(
     assert not output_file.exists()
 
 
-def test_error_loading_yaml(cli_invoke, tmp_path):
+def test_error_loading_yaml(cli_invoke: CliInvoke, tmp_path: Path):
     resume_file = tmp_path / "test-invalid-content.yml"
     resume_file.write_text("invalid")
     result = cli_invoke(["parse", "-c", str(resume_file)])

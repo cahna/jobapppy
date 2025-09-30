@@ -1,0 +1,17 @@
+name: "Setup Python and Poetry project"
+description: "Setup Python and Poetry and install project dependencies"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version-file: '.python-version'
+        cache: 'poetry'
+
+    - name: Install dependencies
+      run: poetry install --no-interaction
+      shell: bash

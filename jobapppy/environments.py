@@ -7,6 +7,8 @@ from .filters import make_tex_escape
 
 
 class TemplateType(str, Enum):
+    """Supported template types."""
+
     tex = "tex"
     md = "md"
 
@@ -18,6 +20,8 @@ DEFAULT_TEMPLATE: Mapping[TemplateType, str] = {
 
 
 class EnvironmentBuilder:
+    """Builds Jinja2 Environments for different template types."""
+
     def __init__(self, pkg_name: str = "jobapppy"):
         self._loader: PackageLoader = PackageLoader(pkg_name)
 
@@ -48,6 +52,7 @@ class EnvironmentBuilder:
         )
 
     def build(self, type_: TemplateType, *args, **kwargs):
+        """Builds and returns a Jinja2 Environment based on the template type."""
         if type_ == TemplateType.tex:
             return self._tex(*args, **kwargs)
         elif type_ == TemplateType.md:

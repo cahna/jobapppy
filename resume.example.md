@@ -1,15 +1,14 @@
-PHILLIP FRY
-===========
+# PHILLIP FRY
 
 `(555) 555-5555`
 `p.fry@dev.null`
-```
+
+```text
 1600 Pennsylvania Avenue, N.W.
 Washington, DC 20500
 ```
 
 ## Work Experience
-
 
 ### Planet Express, Delivery Pilot
 
@@ -40,4 +39,3 @@ New New York
 
 - 1999--3000: Oldest Living Human. *Earth*
 - 3001: Tentacle Pope. *Universe Gamma*
-
